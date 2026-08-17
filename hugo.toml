@@ -1,0 +1,60 @@
+baseURL = "https://nano-container-linux.github.io/"
+title = "nano-container-linux"
+disableKinds = ["taxonomy", "term", "RSS", "sitemap", "404"]
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+[params]
+  subtitle = "boot a machine from an OCI registry"
+  description = "A minimal Linux that boots from an OCI registry: a pure-Go initramfs /init (PID 1) that pulls the machine's image over HTTP and hands off to the real init, an authoritative HCL-configured DNS server and its control tooling, and a macOS menu-bar agent issuing short-lived OpenPubkey SSH certificates."
+  tagline = "A minimal Linux whose machines <strong>boot from an OCI registry</strong> — the image is pulled at boot, not baked into a disk."
+  pills = ["pure-Go PID 1", "OCI over HTTP", "HCL-configured DNS", "OpenPubkey SSH certs"]
+  primary_role = "boot"
+  leads = [
+    "The idea is small and load-bearing: if a machine can pull its root image from a registry at boot, then a fleet is updated by pushing a tag, and the disk stops being the unit of deployment.",
+    "Around that sit the pieces such a fleet needs anyway — authoritative DNS it can configure from files, and short-lived SSH certificates so operators do not carry long-lived keys."
+  ]
+  principles = "Some repositories here are placeholders and are marked as such below. It is more useful to say which ones than to present an org of equal-looking cards."
+
+[[params.repos]]
+  name = "oci-initrd"
+  role = "boot"
+  reach = "initramfs /init, PID 1, pure Go"
+  gomod = true
+  result = "Boots a machine by <strong>pulling its image over HTTP</strong>, extracting it into the ramdisk and handing off to the real init."
+[[params.repos]]
+  name = "dnsd"
+  role = "dns"
+  reach = "HCL files under etc/dnsd/"
+  gomod = true
+  result = "An authoritative DNS server configured entirely from HCL files, scanned in three kinds."
+[[params.repos]]
+  name = "dnsctl"
+  role = "dns"
+  reach = "command-line control for dnsd"
+  gomod = true
+  result = "The control tool for <code>dnsd</code>."
+[[params.repos]]
+  name = "libdnsd"
+  role = "dns"
+  reach = "shared library for dnsd + dnsctl"
+  gomod = true
+  result = "The code <code>dnsd</code> and <code>dnsctl</code> both need, in one place rather than two."
+[[params.repos]]
+  name = "openpubkey-agent"
+  role = "identity"
+  reach = "OIDC login → short-lived SSH certificates"
+  result = "A native <strong>macOS menu-bar agent</strong>: it logs you in through an OIDC provider and issues short-lived SSH certificates, so no long-lived private key sits on the laptop."
+[[params.repos]]
+  name = "oci-pxe"
+  role = "boot"
+  no_ci = true
+  result = "Network boot for the same OCI images."
+  note = "Placeholder — the repository exists but holds no code yet."
+[[params.repos]]
+  name = "nano-container-linux"
+  role = "boot"
+  no_ci = true
+  result = "The distribution itself."
+  note = "Placeholder — the repository exists but holds no code yet."
