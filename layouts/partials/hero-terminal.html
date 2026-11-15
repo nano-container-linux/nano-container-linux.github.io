@@ -1,0 +1,11 @@
+<div class="term">
+      <div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span class="t">zsh</span></div>
+<pre>{{ with .Site.Params.repos }}{{ range first 6 . }}{{ with or .pkg (strings.TrimPrefix "https://" (.url | default "")) (printf "github.com/nano-container-linux/%s" .name) }}<span class="c-cmd">$ go get</span> {{ . }}@latest
+{{ end }}{{ end }}{{ else }}<span class="c-cmd">$ go get</span> github.com/nano-container-linux/dnsctl@latest
+<span class="c-cmd">$ go get</span> github.com/nano-container-linux/dnsd@latest
+<span class="c-cmd">$ go get</span> github.com/nano-container-linux/libdnsd@latest
+<span class="c-cmd">$ go get</span> github.com/nano-container-linux/nano-container-linux@latest
+<span class="c-cmd">$ go get</span> github.com/nano-container-linux/oci-initrd@latest
+<span class="c-cmd">$ go get</span> github.com/nano-container-linux/oci-pxe@latest
+{{ end }}</pre>
+    </div>
